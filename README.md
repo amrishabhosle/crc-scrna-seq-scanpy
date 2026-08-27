@@ -60,6 +60,7 @@ For each cell, the pipeline calculates four standard QC metrics:
 - `total_counts`: total expression/count value per cell
 - `pct_counts_mt`: percentage of expression attributable to mitochondrial genes
 - `pct_counts_ribo`: percentage of expression attributable to ribosomal genes
+
 High mitochondrial expression combined with low library complexity can indicate damaged cells that have lost cytoplasmic RNA. Low detected-gene and count values can also represent empty droplets or low-quality cell barcodes. QC metrics were inspected globally and stratified by sample:`biosample_id`, because QC distributions differed substantially across libraries. High mitochondrial proportions are commonly used as a marker of low-quality cells, although suitable thresholds depend on tissue, protocol, and dataset context.
 
 ### Sample-level assessment
