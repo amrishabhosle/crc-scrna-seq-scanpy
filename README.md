@@ -14,7 +14,7 @@ This project investigates cell-type composition and transcriptional-state differ
 - Tissue: Colorectal tumor, tumor border and adjacent non-malignant colon tissue
 - Primary data format: Matrix Market sparse count matrix , Ensembl gene identifiers, and cell metadata
 
-The original source files are not included in this repository. Download them from the EBI study directory and place them in `data/raw/`.
+The original source files are not included in this repository. Download them from the EBI study directory (https://ftp.ebi.ac.uk/pub/databases/microarray/data/atlas/sc_experiments/E-MTAB-8410/) and place them in `data/raw/`.
 
 ## Project structure
 
@@ -89,8 +89,16 @@ All QC flags are retained in `adata.obs` to make filtering decisions auditable a
 The source study used DoubletFinder for doublet identification. DoubletFinder detects potential doublets by comparing observed cells with artificial doublets generated from combinations of cell-expression profiles.The supplied AnnData expression matrix contains substantive non-integer values. Therefore, the matrix cannot be safely treated as a raw UMI count matrix by rounding values for a raw-count-dependent doublet-calling workflow such as Scrublet.
 For a faithful reproduction of the study’s doublet filtering, future work should use the authors’ original per-library count matrices and run DoubletFinder separately for each library, or recover author-provided doublet annotations if available. Until then, no independent doublet calls are made from the provided fractional-valued matrix; this limitation is recorded explicitly rather than applying a method outside its intended input assumptions.
 
+## Normalization
+To preserve consistency with the original study, expression values were normalized using the same library-size normalization and log transformation strategy. Each cell was scaled to a total of 10,000 count-like expression units across all genes, followed by a natural-log transformation with a pseudocount of 1, log(1+x). This is equivalent to Seurat’s LogNormalize procedure with scale.factor = 10000 and was implemented in Scanpy using sc.pp.normalize_total(target_sum=10_000) followed by sc.pp.log1p(). The QC-retained input matrix, normalized counts, and log-normalized expression matrix were retained in AnnData layers for provenance and reproducibility.
+
+## Clustering
+
+
 ## License and attribution
 
 Data are provided by EMBL-EBI Expression Atlas under the source study’s terms. Cite E-MTAB-8410 and the associated publication when reusing the data.
 https://ftp.ebi.ac.uk/pub/databases/microarray/data/atlas/sc_experiments/E-MTAB-8410/
+Lee HO, Hong Y, Etlioglu HE, Cho YB, Pomella V, Van den Bosch B, Vanhecke J, Verbandt S, Hong H, Min JW, Kim N, Eum HH, Qian J, Boeckx B, Lambrechts D, Tsantoulis P, De Hertogh G, Chung W, Lee T, An M, Shin HT, Joung JG, Jung MH, Ko G, Wirapati P, Kim SH, Kim HC, Yun SH, Tan IBH, Ranjan B, Lee WY, Kim TY, Choi JK, Kim YJ, Prabhakar S, Tejpar S, Park WY. Lineage-dependent gene expression programs influence the immune landscape of colorectal cancer. Nat Genet. 2020 Jun;52(6):594-603. doi: 10.1038/s41588-020-0636-z. Epub 2020 May 25. PMID: 32451460.
+
 Joanito I, Wirapati P, Zhao N, Nawaz Z, Yeo G, Lee F, Eng CLP, Macalinao DC, Kahraman M, Srinivasan H, Lakshmanan V, Verbandt S, Tsantoulis P, Gunn N, Venkatesh PN, Poh ZW, Nahar R, Oh HLJ, Loo JM, Chia S, Cheow LF, Cheruba E, Wong MT, Kua L, Chua C, Nguyen A, Golovan J, Gan A, Lim WJ, Guo YA, Yap CK, Tay B, Hong Y, Chong DQ, Chok AY, Park WY, Han S, Chang MH, Seow-En I, Fu C, Mathew R, Toh EL, Hong LZ, Skanderup AJ, DasGupta R, Ong CJ, Lim KH, Tan EKW, Koo SL, Leow WQ, Tejpar S, Prabhakar S, Tan IB. Single-cell and bulk transcriptome sequencing identifies two epithelial tumor cell states and refines the consensus molecular classification of colorectal cancer. Nat Genet. 2022 Jul;54(7):963-975. doi: 10.1038/s41588-022-01100-4. Epub 2022 Jun 30. PMID: 35773407; PMCID: PMC9279158.
