@@ -18,6 +18,41 @@ The original source files are not included in this repository. Download them fro
 
 ## Project structure
 
+```text
+├── data
+│   ├── interim
+│   │   ├── E-MTAB-8410_annotated.h5ad
+│   │   ├── E-MTAB-8410_qc.h5ad
+│   │   └── E-MTAB-8410_raw.h5ad
+│   ├── raw
+│   │   ├── E-MTAB-8410.aggregated_counts.mtx_cols.gz
+│   │   ├── E-MTAB-8410.aggregated_counts.mtx_rows.gz
+│   │   ├── E-MTAB-8410.aggregated_counts.mtx.gz
+│   │   ├── E-MTAB-8410.cell_metadata.tsv
+│   │   └── E-MTAB-8410.sdrf.txt
+│   └── reference
+│       └── Homo_sapiens.GRCh37.87.gtf.gz
+├── environment.yml
+├── figures
+│   ├── qc_grouped_violin_metrics.png
+│   ├── qc_total_counts_vs_genes.png
+│   └── qc_violin_metrics.png
+├── LICENSE
+├── notebooks
+│   ├── 01_create_raw_adata.ipynb
+│   ├── 02_qc_preprocess.ipynb
+│   ├── 03_normalization.ipynb
+│   ├── 04_clustering.ipynb
+│   └── 05_celltype_annotation.ipynb
+├── README.md
+├── results
+└── src
+    ├── attach_gene_symbols.py
+    ├── ingest_data.py
+    └── qc_preprocess.py
+```
+
+
 ## Data ingestion
 
 The EBI bundle includes:
