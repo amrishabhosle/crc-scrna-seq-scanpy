@@ -16,6 +16,29 @@ This project investigates cell-type composition and transcriptional-state differ
 
 The original source files are not included in this repository. Download them from the EBI study directory (https://ftp.ebi.ac.uk/pub/databases/microarray/data/atlas/sc_experiments/E-MTAB-8410/) and place them in `data/raw/`.
 
+## Project Status
+
+🚧 Work in progress
+
+Completed:
+- Data ingestion
+- Quality-control preprocessing
+- Gene-symbol attachment
+- Normalization
+- Clustering
+- Cell-type annotation
+
+Planned:
+- Compare cell-type composition between tumor and adjacent non-malignant samples.
+- Perform cell-type-specific pseudobulk differential expression analysis.
+- Identify tumor-associated genes within malignant, immune, and stromal populations.
+- Run pathway enrichment analysis on differentially expressed genes.
+- Score tumor-related gene programs, including proliferation, hypoxia, and epithelial–mesenchymal transition.
+- Characterize tumor-microenvironment changes across immune and stromal cell types.
+- Explore cell–cell communication differences between tumor and adjacent tissue.
+- Create publication-ready visualizations and summarize biological findings.
+
+
 ## Project structure
 
 ```text
